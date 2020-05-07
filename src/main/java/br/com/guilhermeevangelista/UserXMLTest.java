@@ -27,4 +27,9 @@ public class UserXMLTest {
                 .body("name", hasItems("Zezinho", "Zezinho"))
         ;
     }
+
+    @Test
+    public void testeNovoMetodo(){
+        System.out.println("eae");
+    }
 }
