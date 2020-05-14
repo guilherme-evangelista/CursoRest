@@ -4,14 +4,15 @@ import io.restassured.RestAssured;
 import io.restassured.http.Method;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UserJsonTest {
     @Test
@@ -31,14 +32,14 @@ public class UserJsonTest {
     public void deveVerificarPrimeiroNivelComOutrasFormas(){
         Response response = RestAssured.request(Method.GET, "http://restapi.wcaquino.me/users/1");
         //path
-        Assert.assertEquals(1, response.path("id"));
-        Assert.assertEquals(1, response.path("%s","id"));
+        assertEquals(1, response.path("id"));
+        assertEquals(1, response.path("%s","id"));
         //jsonPath
         JsonPath jsonPath = new JsonPath(response.asString());
-        Assert.assertEquals(1, jsonPath.getInt("id"));
+        assertEquals(1, jsonPath.getInt("id"));
         //from
         int id = JsonPath.from(response.asString()).getInt("id");
-        Assert.assertEquals(1, id);
+        assertEquals(1, id);
     }
 
     @Test
@@ -135,7 +136,7 @@ public class UserJsonTest {
             .extract().path("name")
         ;
 
-        Assert.assertEquals(names.size(), 3);
-        Assert.assertTrue(names.get(0).equalsIgnoreCase("joão da silva"));
+        assertEquals(names.size(), 3);
+        assertTrue(names.get(0).equalsIgnoreCase("joão da silva"));
     }
 }
